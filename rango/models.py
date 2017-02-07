@@ -3,10 +3,12 @@ from django.db import models
 from django.template.defaultfilters import slugify
 
 class Category(models.Model):
-	name = models.CharField(max_length=128, unique=True)
+	max = 128
+	name = models.CharField(max_length=max, unique=True)
 	views = models.IntegerField(default=0)
 	likes = models.IntegerField(default=0)
 	slug = models.SlugField(unique=True)
+	
 	
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.name)
@@ -37,4 +39,15 @@ class Page(models.Model):
 		return self.title
 		
 
+class PageForm(models.Model):
+	
+	def clean(self):
+		cleaned_data = self.cleaned_data
+		url = cleaned_data.get('url')
+		
+		if url and not url.startswith('http://'):
+			url = 'htttp://' + url
+			cleaned_data['url'] + url
+			
+			return cleaned_data
 	
