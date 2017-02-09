@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from rango.models import Category
 from rango.models import Page
 from rango.forms import CategoryForm
-from rango.models import PageForm
+from rango.forms import PageForm
 
 def add_category(request):
 	form=CategoryForm()
@@ -28,7 +28,7 @@ def show_category(request, category_name_slug):
 		category = Category.objects.get(slug=category_name_slug)
 		
 		pages = Page.objects.filter(category=category)
-		
+		context_dict['pages'] = pages
 		context_dict['category'] = category
 		
 	
@@ -74,9 +74,9 @@ def add_page(request, category_name_slug):
 		form = PageForm(request.POST)
 	if form.is_valid():
 		if category:
-			page = form.save(commit=False)
+			page = form.save(commit=false)
 			page.category = category
-			page.viewd = 0
+			page.views = 0
 			page.save()
 			return show_category(request, category_name_slug)
 	else:
