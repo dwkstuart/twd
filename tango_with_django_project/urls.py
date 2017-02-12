@@ -24,6 +24,8 @@ urlpatterns = [
 	url(r'^$', views.index, name='index'),
 	url(r'^rango/', include('rango.urls')),
 	url(r'^admin/', admin.site.urls),
+	url(r'^restricted/', views.restricted, name='restricted'),
+	url('^logout/$', views.user_logout, name='logout'),
 
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
