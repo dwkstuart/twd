@@ -1,3 +1,4 @@
 DAVID STUART
+Information Technology Assessed Exercise
 
-WORKING THROUGH THE TANGO WITH DJANGO BOOK
+Completing Tango with Django tutorial
